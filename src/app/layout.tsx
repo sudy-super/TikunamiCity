@@ -1,10 +1,27 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const SITE_URL = "https://tikunami.sudy.me";
+
 export const metadata: Metadata = {
-  title: "チクナミシティ 街づくりプロジェクト",
+  title: "『チクナミシティ』街づくりプロジェクト",
   description: "日立製作所として『チクナミシティ』と社会の発展に最大限貢献せよ！",
   icons: [],
+  metadataBase: new URL(SITE_URL),
+  openGraph: {
+    title: "『チクナミシティ』街づくりプロジェクト",
+    description: "日立製作所として『チクナミシティ』と社会の発展に最大限貢献せよ！",
+    url: SITE_URL,
+    siteName: "チクナミシティ",
+    images: [{ url: "/og.png", width: 1200, height: 630 }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "『チクナミシティ』街づくりプロジェクト",
+    description: "日立製作所として『チクナミシティ』と社会の発展に最大限貢献せよ！",
+    images: ["/og.png"],
+  },
 };
 
 export default function RootLayout({
