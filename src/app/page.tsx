@@ -25,7 +25,7 @@ export default function StartPage() {
         </button>
       </div>
       <p className="absolute bottom-6 left-0 right-0 text-center text-[10px] text-gray-400 leading-relaxed px-8">
-        これは<a href="https://hitachi-v2-service-6jrkee5ovq-an.a.run.app" target="_blank" rel="noopener noreferrer" className="underline">「MIRAI都市」街づくりプロジェクト</a>とは何も関係ない架空のチクナミシティを舞台に街づくりを行うゲームです。<br />
+        これは<a href="https://hitachi-v2-service-6jrkee5ovq-an.a.run.app" target="_blank" rel="noopener noreferrer" className="underline">「MIRAI都市」街づくりプロジェクト</a>とは何の関係もない架空のチクナミシティを舞台に街づくりを行うゲームです。<br />
         実在する組織、団体、ウェブサイト等とは一切関係ありません。
       </p>
     </main>
