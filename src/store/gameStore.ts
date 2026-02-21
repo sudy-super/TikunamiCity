@@ -141,6 +141,13 @@ export const useGameStore = create<GameState>((set, get) => ({
   advancePeriod: () => {
     const state = get();
     if (state.currentPeriod >= 3) {
+      const result = {
+        socialPointsByPeriod: state.socialPointsByPeriod,
+        achievedSolutions: state.achievedSolutions,
+        techLevels: state.techLevels,
+        soldTechs: Array.from(state.soldTechs),
+      };
+      localStorage.setItem("lastGameResult", JSON.stringify(result));
       set({ gameFinished: true });
       return;
     }

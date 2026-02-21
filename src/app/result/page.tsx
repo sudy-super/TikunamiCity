@@ -1,8 +1,16 @@
 "use client";
 
-import { useGameStore } from "@/store/gameStore";
+import { useGameStore, type AchievedSolution } from "@/store/gameStore";
 import { useRouter } from "next/navigation";
 import { technologies } from "@/data/technologies";
+import { useEffect, useState } from "react";
+
+type DisplayData = {
+  socialPointsByPeriod: [number, number, number];
+  achievedSolutions: AchievedSolution[];
+  techLevels: Record<string, number>;
+  soldTechs: Set<string>;
+};
 
 const categoryStyles: Record<string, { bg: string; text: string }> = {
   PD: { bg: "bg-yellow-100", text: "text-yellow-700" },
@@ -13,12 +21,40 @@ const categoryStyles: Record<string, { bg: string; text: string }> = {
 export default function ResultPage() {
   const { socialPointsByPeriod, achievedSolutions, techLevels, soldTechs, resetGame } = useGameStore();
   const router = useRouter();
-  const totalSocial = socialPointsByPeriod.reduce((sum, p) => sum + p, 0);
+  const [displayData, setDisplayData] = useState<DisplayData | null>(null);
+
+  useEffect(() => {
+    const totalSocial = socialPointsByPeriod.reduce((sum, p) => sum + p, 0);
+    if (totalSocial > 0) {
+      setDisplayData({ socialPointsByPeriod, achievedSolutions, techLevels, soldTechs });
+    } else {
+      const saved = localStorage.getItem("lastGameResult");
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        setDisplayData({
+          socialPointsByPeriod: parsed.socialPointsByPeriod,
+          achievedSolutions: parsed.achievedSolutions,
+          techLevels: parsed.techLevels,
+          soldTechs: new Set<string>(parsed.soldTechs),
+        });
+      }
+    }
+  }, [socialPointsByPeriod, achievedSolutions, techLevels, soldTechs]);
 
   const handleRestart = () => {
     resetGame();
     router.push("/");
   };
+
+  if (!displayData) {
+    return (
+      <main className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-gray-400 text-sm">データを読み込み中...</div>
+      </main>
+    );
+  }
+
+  const totalSocial = displayData.socialPointsByPeriod.reduce((sum, p) => sum + p, 0);
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -38,7 +74,7 @@ export default function ResultPage() {
             {[1, 2, 3].map((period) => (
               <div key={period} className="flex justify-center space-x-8">
                 <div className="w-8 font-bold">{period}期</div>
-                <div className="w-32 font-bold">{socialPointsByPeriod[period - 1]}pt</div>
+                <div className="w-32 font-bold">{displayData.socialPointsByPeriod[period - 1]}pt</div>
               </div>
             ))}
           </div>
@@ -48,7 +84,7 @@ export default function ResultPage() {
 
         {/* Solutions List */}
         <div className="px-4 space-y-4 mb-6">
-          {achievedSolutions.map((a, i) => (
+          {displayData.achievedSolutions.map((a, i) => (
             <div key={i} className="border-2 border-teal-700 rounded-xl p-4 relative">
               <div className="absolute right-0 top-0 bg-teal-700 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">
                 ソリューション達成
@@ -84,8 +120,8 @@ export default function ResultPage() {
         {/* Final Asset List */}
         <div className="px-4 space-y-2">
           {technologies.map((tech) => {
-            const isSold = soldTechs.has(tech.id);
-            const level = techLevels[tech.id] ?? 0;
+            const isSold = displayData.soldTechs.has(tech.id);
+            const level = displayData.techLevels[tech.id] ?? 0;
             const style = categoryStyles[tech.category];
 
             return (
