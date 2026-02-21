@@ -35,8 +35,8 @@ async function main() {
     const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
 
-    // OGP推奨サイズ 1200x630, 2x で高解像度 (2400x1260px)
-    await page.setViewport({ width: 1200, height: 630, deviceScaleFactor: 2 });
+    // OGP標準サイズ 1200x630
+    await page.setViewport({ width: 1200, height: 630, deviceScaleFactor: 1 });
     await page.goto(`http://localhost:${PORT}`, { waitUntil: "networkidle0" });
 
     // Next.js dev バッジを非表示
