@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     description: "日立製作所として『チクナミシティ』と社会の発展に最大限貢献せよ！",
     url: SITE_URL,
     siteName: "チクナミシティ",
-    images: [{ url: "/og.png", width: 1200, height: 630 }],
+    images: [{ url: "/og.png", width: 2400, height: 1260, type: "image/png" }],
     type: "website",
   },
   twitter: {
