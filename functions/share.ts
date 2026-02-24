@@ -11,8 +11,8 @@ export const onRequest: PagesFunction = async (context) => {
 
   const ogImageUrl = `${url.origin}/api/og?pt=${pt}&p1=${p1}&p2=${p2}&p3=${p3}&n=${n}`;
   const gameUrl = `${url.origin}/`;
-  const title = `『チクナミシティ』で${pt}pt達成！`;
-  const description = `社会貢献ポイント${pt}pt・ソリューション${n}件を達成しました。`;
+  const title = `『チクナミシティ』で${pt}pt分社会に貢献しました！`;
+  const description = ``;
 
   const html = `<!DOCTYPE html>
 <html lang="ja">

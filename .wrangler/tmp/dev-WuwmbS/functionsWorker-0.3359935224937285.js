@@ -24601,8 +24601,8 @@ var init_share = __esm({
       const n = url.searchParams.get("n") ?? "0";
       const ogImageUrl = `${url.origin}/api/og?pt=${pt}&p1=${p1}&p2=${p2}&p3=${p3}&n=${n}`;
       const gameUrl = `${url.origin}/`;
-      const title22 = `\u300E\u30C1\u30AF\u30CA\u30DF\u30B7\u30C6\u30A3\u300F\u3067${pt}pt\u9054\u6210\uFF01`;
-      const description = `\u793E\u4F1A\u8CA2\u732E\u30DD\u30A4\u30F3\u30C8${pt}pt\u30FB\u30BD\u30EA\u30E5\u30FC\u30B7\u30E7\u30F3${n}\u4EF6\u3092\u9054\u6210\u3057\u307E\u3057\u305F\u3002`;
+      const title22 = `\u300E\u30C1\u30AF\u30CA\u30DF\u30B7\u30C6\u30A3\u300F\u3067${pt}pt\u5206\u793E\u4F1A\u306B\u8CA2\u732E\u3057\u307E\u3057\u305F\uFF01`;
+      const description = ``;
       const html = `<!DOCTYPE html>
 <html lang="ja">
 <head>
