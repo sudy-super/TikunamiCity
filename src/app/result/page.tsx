@@ -150,7 +150,30 @@ export default function ResultPage() {
           })}
         </div>
 
-        <div className="mt-8 px-4">
+        <div className="mt-8 px-4 space-y-3">
+          <button
+            onClick={() => {
+              const solutionCount = displayData.achievedSolutions.length;
+              const [p1, p2, p3] = displayData.socialPointsByPeriod;
+              const shareParams = new URLSearchParams({
+                pt: String(totalSocial),
+                p1: String(p1),
+                p2: String(p2),
+                p3: String(p3),
+                n: String(solutionCount),
+              });
+              const shareUrl = `https://tikunami.sudy.me/share?${shareParams}`;
+              const text = `『チクナミシティ』街づくりプロジェクトで社会貢献ポイント${totalSocial}ptを獲得しました！\n達成ソリューション: ${solutionCount}件\n#チクナミシティ`;
+              const tweetUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}`;
+              window.open(tweetUrl, "_blank", "noopener,noreferrer");
+            }}
+            className="flex items-center justify-center w-full bg-black text-white font-bold py-3 rounded-lg hover:bg-gray-800 transition shadow-md gap-2"
+          >
+            <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" aria-hidden="true">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.26 5.632 5.904-5.632Zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+            結果をポストする
+          </button>
           <button
             onClick={handleRestart}
             className="block w-full bg-teal-700 text-white font-bold py-3 rounded-lg hover:bg-teal-800 transition shadow-md"
