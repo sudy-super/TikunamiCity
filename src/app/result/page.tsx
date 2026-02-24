@@ -163,7 +163,7 @@ export default function ResultPage() {
                 n: String(solutionCount),
               });
               const shareUrl = `https://tikunami.sudy.me/share?${shareParams}`;
-              const text = `『チクナミシティ』街づくりプロジェクトで社会貢献ポイント${totalSocial}ptを獲得しました！\n達成ソリューション: ${solutionCount}件\n#チクナミシティ`;
+              const text = `『チクナミシティ』街づくりプロジェクトで${totalSocial}社会貢献ポイントを獲得しました！\n#チクナミシティ\n`;
               const tweetUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}`;
               window.open(tweetUrl, "_blank", "noopener,noreferrer");
             }}
