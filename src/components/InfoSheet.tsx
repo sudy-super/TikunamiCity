@@ -196,16 +196,99 @@ const sheetSolutions: SheetSolution[] = [
 ];
 
 /* ───────── 住民の声 ───────── */
-const residentVoices: string[] = [
-  "しょっちゅう電気が使えなくなるので日常の生活がままならない状態で…どうにかならないんでしょうか？近隣都市では電力が余っている状況に対し、当市は慢性的に不足している状況です。また、電力量のみならず、電灯がチラついたり、制御的に不安定なのか？と感じることがあります。",
-  "特に工業エリアで、水や空気がとにかく汚いです…汚染が原因で病人も殺到して診てもらえないし…改善しようにもこんな環境には人は来ない、人の手に頼らずして都市の産業が破綻してしまうのでは…",
-  "都心は電車が激混みで…。しかも電車もやたら止まりし…。ニュータウンに住んでからすると、結局電車で移動するしかないのに、日によっては渋滞で不便だし、本当に参ってます。",
-  "病院に行っても全然診てもらえないし、そもそも治療設備がないから、手術や長期入院が必要な大病気になったら他の都市へ移住しなきゃいけない…。突然の停電で手術中に設備が止まった話も聞いたことがあって…。命に関わることなのでなんとかしてほしいです。",
-  "MIRAI都市は、工業の町です。これまでも、新たなモノを生み出して発展し続けてきました。しかし、近年はテクノロジーの導入が遅れております。継承されている技術と優秀な人材は集まっていると思うのですが、無駄な業務に追われているのはもったいないです。",
-  "観光地としてもっと盛り上がってほしいのに、現状は街の景観が寂しい気がするんですよね。もっとド派手な街になってもいいんじゃいでは？",
-  "もし万が一災害が起きたら…って考えるとすごく怖いです。ほかの都市や国の大変なニュースを聞くので、余計に心配になっちゃって。いざという時、私たちはちゃんと守ってもらえるんでしょうか。",
-  "街が発展しているのはいいが、その分仕事が増えて毎日働き詰めで疲れるのが本音です。経済は回っているのかもしれませんけど！",
-  "MIRAI都市と同じような問題を抱えている都市はあるはずです。そんな都市の希望になるためには他の場所でも通用する拡張性、再現性、持続可能性をもったソリューションが重要だと考えます。",
+type Seg = { text: string; bold?: boolean };
+type ResidentVoice = Seg[][];
+
+const residentVoices: ResidentVoice[] = [
+  [
+    [
+      { text: "しょっちゅう電気が使えなくなるので" },
+      { text: "日常の生活がままならない", bold: true },
+      { text: "状態で..." },
+    ],
+    [
+      { text: "どうにかならないんでしょうか？" },
+      { text: "近隣都市では電力が余っている", bold: true },
+      { text: "状況に対し、当市は" },
+      { text: "慢性的に不足", bold: true },
+      { text: "している状況です。" },
+    ],
+    [
+      { text: "また、電力量のみならず、電灯がチラついたりしているので、制御が不安定なのか？と感じることがあります。" },
+    ],
+  ],
+  [
+    [
+      { text: "特に工業エリアで、水や空気がとにかく汚い", bold: true },
+      { text: "です..." },
+      { text: "汚染が原因で病人も殺到して診てもらえない", bold: true },
+      { text: "し..." },
+    ],
+    [{ text: "改善しようにもこんな環境に人は来ない。" }],
+    [{ text: "人の手に頼らず抜本的に変えないと都市の産業が破綻してしまうのでは..." }],
+  ],
+  [
+    [{ text: "都心は電車が激混みで...。", bold: true }],
+    [{ text: "しかも電車もやたらと止まるし...。" }],
+    [
+      { text: "ニュータウンに住む私からすると、結局車で移動するしかないのに、日によっては" },
+      { text: "渋滞で不便", bold: true },
+      { text: "だし、本当に参ってます。" },
+    ],
+  ],
+  [
+    [
+      { text: "病院に行っても全然診てもらえないし、そもそも治療設備がないから、" },
+      { text: "手術や長期入院が必要な病気になったら他の都市へ移住しなきゃ", bold: true },
+      { text: "いけない...。" },
+      { text: "突然の停電で手術中に設備が止まった", bold: true },
+      { text: "話も聞いたことがあって...。" },
+    ],
+    [{ text: "命に関わることなのでなんとかしてほしいです。" }],
+  ],
+  [
+    [{ text: "チクナミシティは、工業の町です。" }],
+    [
+      { text: "これまでも、新たなモノを生み出して発展し続けてきましたが、近年はテクノロジーの導入が遅れております。" },
+      { text: "継承されている技術と優秀な人材は集まっている", bold: true },
+      { text: "と感じるのですが、" },
+      { text: "無駄な業務に追われている", bold: true },
+      { text: "のはもったいないです。" },
+    ],
+  ],
+  [
+    [
+      { text: "観光地として" },
+      { text: "もっと盛り上がってほしい", bold: true },
+      { text: "のに、現状は街の景観が寂しい気がするんですよね。もっとド派手な街になってもいいのでは？" },
+    ],
+  ],
+  [
+    [
+      { text: "もし" },
+      { text: "万が一災害が起きたら", bold: true },
+      { text: "...って考えるとすごく怖いです。" },
+      { text: "ほかの都市や国の大変なニュースを聞く", bold: true },
+      { text: "ので、余計に心配になっちゃって。いざという時、私たちはちゃんと守ってもらえるんでしょうか。" },
+    ],
+  ],
+  [
+    [
+      { text: "街が発展しているのはいい", bold: true },
+      { text: "が、その分" },
+      { text: "仕事が増えて毎日働き詰めで疲れる", bold: true },
+      { text: "のが本音です。" },
+    ],
+    [{ text: "経済は回っているのかもしれませんけどね！" }],
+  ],
+  [
+    [{ text: "チクナミシティと同じような問題を抱えている都市はあるはずです。" }],
+    [
+      { text: "そんな都市の希望になるためには" },
+      { text: "他の場所でも通用する拡張性、再現性、持続可能性をもったソリューション", bold: true },
+      { text: "が重要だと考えます。" },
+    ],
+  ],
 ];
 
 /* ───────── 社員の声 ───────── */
@@ -378,9 +461,9 @@ function ResidentVoiceTab() {
   return (
     <div className="space-y-4">
       <p className="text-xs text-gray-500 px-1">
-        MIRAI都市の住民から寄せられた声です。どのソリューションが求められているか考えてみましょう。
+        チクナミシティの住民から寄せられた声です。どのソリューションが求められているか考えてみましょう。
       </p>
-      {residentVoices.map((text, vi) => (
+      {residentVoices.map((paragraphs, vi) => (
         <div key={vi} className="bg-white rounded-xl border border-orange-100 p-4">
           <div className="flex items-start gap-3">
             <div className="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center flex-shrink-0">
@@ -392,7 +475,19 @@ function ResidentVoiceTab() {
                 <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
               </svg>
             </div>
-            <p className="flex-1 text-sm text-gray-700 leading-relaxed">{text}</p>
+            <div className="flex-1 space-y-2">
+              {paragraphs.map((para, pi) => (
+                <p key={pi} className="text-sm text-gray-700 leading-relaxed">
+                  {para.map((seg, si) =>
+                    seg.bold ? (
+                      <strong key={si} className="text-red-600 font-bold">{seg.text}</strong>
+                    ) : (
+                      <span key={si}>{seg.text}</span>
+                    )
+                  )}
+                </p>
+              ))}
+            </div>
           </div>
         </div>
       ))}
@@ -665,7 +760,7 @@ export default function InfoSheet() {
                 <button
                   key={tab}
                   onClick={() => setActiveTab(i)}
-                  className={`flex-1 text-xs font-bold py-2 rounded-t-lg transition-colors ${
+                  className={`flex-1 text-[10px] font-bold py-2 rounded-t-lg transition-colors ${
                     activeTab === i
                       ? "bg-teal-700 text-white"
                       : "bg-gray-100 text-gray-500 hover:bg-gray-200"
