@@ -10,7 +10,7 @@ const categoryStyles: Record<TechCategory, { bg: string; text: string }> = {
   IT: { bg: "bg-blue-100", text: "text-blue-700" },
 };
 
-const tabs = ["技術一覧", "ソリューション一覧", "社員の声"] as const;
+const tabs = ["技術一覧", "ソリューション一覧", "住民の声", "社員の声"] as const;
 
 /* ───────── ソリューション情報シートデータ (配布資料の通り、一部 Lv.??) ───────── */
 interface SheetReq {
@@ -195,6 +195,19 @@ const sheetSolutions: SheetSolution[] = [
   },
 ];
 
+/* ───────── 住民の声 ───────── */
+const residentVoices: string[] = [
+  "しょっちゅう電気が使えなくなるので日常の生活がままならない状態で…どうにかならないんでしょうか？近隣都市では電力が余っている状況に対し、当市は慢性的に不足している状況です。また、電力量のみならず、電灯がチラついたり、制御的に不安定なのか？と感じることがあります。",
+  "特に工業エリアで、水や空気がとにかく汚いです…汚染が原因で病人も殺到して診てもらえないし…改善しようにもこんな環境には人は来ない、人の手に頼らずして都市の産業が破綻してしまうのでは…",
+  "都心は電車が激混みで…。しかも電車もやたら止まりし…。ニュータウンに住んでからすると、結局電車で移動するしかないのに、日によっては渋滞で不便だし、本当に参ってます。",
+  "病院に行っても全然診てもらえないし、そもそも治療設備がないから、手術や長期入院が必要な大病気になったら他の都市へ移住しなきゃいけない…。突然の停電で手術中に設備が止まった話も聞いたことがあって…。命に関わることなのでなんとかしてほしいです。",
+  "MIRAI都市は、工業の町です。これまでも、新たなモノを生み出して発展し続けてきました。しかし、近年はテクノロジーの導入が遅れております。継承されている技術と優秀な人材は集まっていると思うのですが、無駄な業務に追われているのはもったいないです。",
+  "観光地としてもっと盛り上がってほしいのに、現状は街の景観が寂しい気がするんですよね。もっとド派手な街になってもいいんじゃいでは？",
+  "もし万が一災害が起きたら…って考えるとすごく怖いです。ほかの都市や国の大変なニュースを聞くので、余計に心配になっちゃって。いざという時、私たちはちゃんと守ってもらえるんでしょうか。",
+  "街が発展しているのはいいが、その分仕事が増えて毎日働き詰めで疲れるのが本音です。経済は回っているのかもしれませんけど！",
+  "MIRAI都市と同じような問題を抱えている都市はあるはずです。そんな都市の希望になるためには他の場所でも通用する拡張性、再現性、持続可能性をもったソリューションが重要だと考えます。",
+];
+
 /* ───────── 社員の声 ───────── */
 interface EmployeeVoice {
   paragraphs: { text: string; bold?: boolean }[][];
@@ -354,6 +367,32 @@ function SolutionListTab() {
                 </span>
               );
             })}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ResidentVoiceTab() {
+  return (
+    <div className="space-y-4">
+      <p className="text-xs text-gray-500 px-1">
+        MIRAI都市の住民から寄せられた声です。どのソリューションが求められているか考えてみましょう。
+      </p>
+      {residentVoices.map((text, vi) => (
+        <div key={vi} className="bg-white rounded-xl border border-orange-100 p-4">
+          <div className="flex items-start gap-3">
+            <div className="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center flex-shrink-0">
+              <svg
+                className="w-6 h-6 text-orange-400"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
+              </svg>
+            </div>
+            <p className="flex-1 text-sm text-gray-700 leading-relaxed">{text}</p>
           </div>
         </div>
       ))}
@@ -659,7 +698,8 @@ export default function InfoSheet() {
           >
             {activeTab === 0 && <TechListTab />}
             {activeTab === 1 && <SolutionListTab />}
-            {activeTab === 2 && <EmployeeVoiceTab />}
+            {activeTab === 2 && <ResidentVoiceTab />}
+            {activeTab === 3 && <EmployeeVoiceTab />}
           </div>
         </div>
       </div>
